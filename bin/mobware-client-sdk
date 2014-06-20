@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+	mwclient = require('..'),
+	path = require('path'),
+	utils = require('../lib/utils');
+
+program
+	.usage('get|set [NAME] [VERSION] [options]')
+	.description('get or set the active MobileWare SDK')
+	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+
+program.parse(process.argv);
+
+program.type = program.args[0] || 'get';
+if (program.type === 'set') {
+	program.name = program.args[1];
+	if (!program.name) {
+		utils.die('No sdk name specified for `mwclient sdk set`');
+	}
+	program.version = program.args[2];
+} else if (program.type !== 'get') {
+	utils.die('Invalid `mwclient sdk` type "' + program.type + '". Must be "get" or "set".');
+}
+
+mwclient.sdk(program, function(err, results) {
+	if (err) {
+		utils.die(err.toString());
+	}
+	if (results) {
+		console.log(JSON.stringify(results));
+	}
+});

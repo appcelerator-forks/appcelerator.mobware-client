@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+	mwclient = require('..'),
+	path = require('path'),
+	utils = require('../lib/utils');
+
+program
+	.usage('[options]')
+	.description('get MobileWare keys from tiapp.xml')
+	.option('-k, --keys <keys>', 'Key type to return', 'dev,prod')
+	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+
+program.parse(process.argv);
+
+mwclient.keys(program, function(err, results) {
+	if (err) {
+		utils.die(err.toString());
+	}
+	console.log(results);
+});

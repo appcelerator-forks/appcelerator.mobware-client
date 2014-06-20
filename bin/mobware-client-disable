@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+	mwclient = require('..'),
+	path = require('path'),
+	utils = require('../lib/utils');
+
+program
+	.usage('[options]')
+	.description('disable Appcelerator MobileWare for a project')
+	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+
+program.parse(process.argv);
+
+mwclient.disable(program, function(err) {
+	if (err) {
+		utils.die(err.toString());
+	}
+});

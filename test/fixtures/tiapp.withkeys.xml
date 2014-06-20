@@ -1,0 +1,10 @@
+<ti:app>
+  <property name="mw-key-dev">dummy</property>
+  <property name="mw-key-prod">dummy</property>
+  <property name="mw-sdk-name">my.sdk</property>
+  <modules>
+  	<module>some.other.module</module>
+  	<module version="1.3" platform="commonjs">my.sdk</module>
+  </modules>
+  <plugins/>
+</ti:app>

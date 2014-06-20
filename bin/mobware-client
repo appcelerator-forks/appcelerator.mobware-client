@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var constants = require('../lib/constants'),
+	program = require('commander'),
+	utils = require('../lib/utils');
+
+program.version(require('../package').version, '-v, --version')
+	.command('disable', 'disable MobileWare for a project')
+	.command('enable', 'enable MobileWare for a project')
+	.command('keys', 'get MobileWare SDK API keys')
+	.command('sdk', 'get or set the active MobileWare SDK');
+
+program.parse(process.argv);
+
+// print help with no args
+if (program.args.length < 1) {
+	program.help();
+}
+
+// if there's a command, make sure it's valid
+if (constants.COMMANDS.indexOf(program.args[0]) === -1) {
+	utils.die('unknown command "' + program.rawArgs[2] + '"');
+}

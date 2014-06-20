@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+	mwclient = require('..'),
+	path = require('path'),
+	utils = require('../lib/utils');
+
+program
+	.usage('username password [options]')
+	.description('enable Appcelerator MobileWare for a project')
+	.option('-a, --app-id <app-id>', 'App ID with which to associate this MobileWare enablement')
+	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+
+program.parse(process.argv);
+
+var username = program.args[0],
+	password = program.args[1] || '';
+
+if (!username) {
+	utils.die('username required');
+}
+if (!password) {
+	utils.die('password required');
+}
+
+mwclient.enable(username, password, program, function(err, results) {
+	if (err) {
+		if (err.statusCode) {
+			utils.die('%s (code %s)', err.data, err.statusCode);
+		} else {
+			utils.die(err.toString());
+		}
+	}
+	console.log(JSON.stringify(results));
+});
