@@ -1,12 +1,12 @@
 var bodyParser = require('body-parser'),
-	constants = require('../lib/constants'),
+	constants = require('../../lib/constants'),
 	cookieParser = require('cookie-parser'),
 	express = require('express'),
 	fs = require('fs'),
 	https = require('https'),
 	path = require('path');
 
-var certDir = path.join(__dirname, 'fixtures'),
+var certDir = path.join(__dirname,'..','fixtures'),
 	key = fs.readFileSync(path.join(certDir, 'mw-test-server-key.pem')),
 	cert = fs.readFileSync(path.join(certDir, 'mw-test-server-cert.pem'));
 
@@ -52,7 +52,9 @@ app.post('/api/v1/mmp/enable', function(req, res) {
 	}
 
 	// make sure appId exists
-	if (appId !== 'ti.mw.todo') {
+	if (appId === 'bad.api') {
+		return res.status(500).type('text/plain').send('failed to load MW keys');
+	} else if (appId !== 'ti.mw.todo') {
 		return res.status(400).type('text/plain').send('appId does not exist');
 	}
 
@@ -75,4 +77,5 @@ app.post('/api/v1/mmp/enable', function(req, res) {
 app.on('error', function(err) {
 	console.error('error listen: ' + err);
 });
-app.listen(constants.MW_PORT);
+
+module.exports = app;
