@@ -134,6 +134,28 @@ describe('enable.js', function() {
 			});
 		});
 
+		it('should write MobileWare keys to tiapp.xml with explicit host & port', function(done) {
+			fs.writeFileSync('tiapp.xml',
+				fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8'));
+			enable('test', 'test', {
+				appId: APPID,
+				host: 'localhost',
+				port: 15678
+			}, function(err, results) {
+				should.not.exist(err);
+				should.exist(results);
+				results.result.keys.should.be.an.Object;
+				results.result.keys.development.should.equal('developmentkey');
+				results.result.keys.production.should.equal('productionkey');
+
+				// quick and dirty check
+				var data = fs.readFileSync('tiapp.xml', 'utf8');
+				data.should.containEql('developmentkey');
+				data.should.containEql('productionkey');
+				done();
+			});
+		});
+
 		it('should write MobileWare keys to tiapp.xml as option', function(done) {
 			fs.writeFileSync('tiapp.xml',
 				fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8'));
