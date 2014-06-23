@@ -11,6 +11,19 @@ program
 	.option('-a, --app-id <app-id>', 'App ID with which to associate this MobileWare enablement')
 	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
 
+program.on('--help', function() {
+	console.log('  Examples:');
+	console.log('');
+	console.log('    # specify only the required values, use defaults for the rest');
+	console.log('    $ mobware-client enable myusername mypassword');
+	console.log('');
+	console.log('    # configure it heavily')
+	console.log('    $ mobware-client enable myusername mypassword --tiapp /path/to/tiapp.xml \\');
+	console.log('        --host 360-dev.appcelerator.com --port 443 \\');
+	console.log('        --appId 7bd1239e-b199-4fbc-9c1c-30aa0b8d08ea');
+	console.log('');
+});
+
 program.parse(process.argv);
 
 var username = program.args[0],
