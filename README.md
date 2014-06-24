@@ -17,13 +17,28 @@ $ npm install -g mobware-client
 Enables a Titanium project for MW. It makes an HTTPS request to MW servers and gets API keys in return.  The keys are then added to the user's tiapp.xml file.
 
 ```bash
-$ mobware-client enable USERNAME PASSWORD --app-id APP_ID --tiapp TIAPP_XML
-```
+  Usage: mobware-client-enable username password [options]
 
-* **USERNAME**: The user's Appcelerator account username.
-* **PASSWORD**: The user's Appcelerator account password
-* **APP_ID**: The `<id>` property in the tiapp.xml
-* **TIAPP_XML**: Full path to this project's tiapp.xml file
+  Options:
+
+    -h, --help             output usage information
+    -a, --app-id <app-id>  App ID with which to associate this MW enablement
+    -H, --host <host>      The host for connecting to the MW server
+    -P, --no-prompt        No interactive prompting
+    -p, --port <port>      The port for connecting to the MW server
+    -t, --tiapp <tiapp>    Path to tiapp.xml to be updated
+
+  Examples:
+
+    # specify only the required values, use defaults for the rest
+    $ mobware-client enable myusername mypassword
+
+    # configure it heavily
+    $ mobware-client enable myusername mypassword --tiapp /path/to/tiapp.xml \
+        --host 360-dev.appcelerator.com --port 443 \
+        --appId 7bd1239e-b199-4fbc-9c1c-30aa0b8d08ea
+
+```
 
 The result of a successful call:
 
@@ -39,39 +54,69 @@ The result of a successful call:
 The opposite of [enable][], this process will remove MW API keys from your tiapp.xml, thereby invalidating any MW SDK usage. It exits quietly if no keys are present in the tiapp.xml.
 
 ```bash
-$ mobware-client disable --tiapp TIAPP_XML
-```
+  Usage: mobware-client-disable [options]
 
-* **TIAPP_XML**: Full path to this project's tiapp.xml file
+  Options:
+
+    -h, --help           output usage information
+    -t, --tiapp <tiapp>  Path to tiapp.xml
+
+  To disable Mobware in a project:
+
+    $ mobware-client disable --tiapp /path/to/tiapp.xml
+```
 
 ### keys
 
-Get the MW API keys from the tiapp.xml.
+Get the MW API keys from the tiapp.xml of an MW-enabled project.
 
 ```bash
-# get all keys
-$ mobware-client keys
-{ "development": "DEVKEY", "production": "PRODKEY" }
+  Usage: mobware-client-keys [options]
 
-# get specific key
-$ mobware-client keys --keys production
-{ "production": "PRODKEY" }
+  Options:
+
+    -h, --help           output usage information
+    -k, --keys <keys>    Key type to return. Can be a comma-separated list.
+    -t, --tiapp <tiapp>  Path to tiapp.xml
+
+  Examples:
+
+    # list all Mobware keys for an enabled project
+    $ mobware-client keys
+      { "development": "DEVKEY", "production": "PRODKEY" }
+
+    # list specific key
+    $ mobware-client keys --keys production
+      { "production": "PRODKEY" }
+
+    # list specific keys as comma-separated list
+    $ mobware-client keys --keys production,development
+      { "development": "DEVKEY", "production": "PRODKEY" }
 ```
 
 ### sdk
 
-Get the active MW SDK for the project.
+Get or set the active MW SDK for the project.
 
 ```bash
-$ mobware-client sdk get --tiapp TIAPP_XML
+  Usage: mobware-client-sdk get|set [NAME] [VERSION] [options]
+
+  Options:
+
+    -h, --help           output usage information
+    -t, --tiapp <tiapp>  Path to tiapp.xml
+
+  Examples:
+
+    # get current Mobware SDK name from tiapp.xml
+    $ mobware-client sdk get
+      name.of.mobwareSdk
+
+    # set Mobware SDK with version
+    $ mobware-client sdk set my.mw.sdk 2.0
 ```
 
-Or set the active MW SDK for the project.
-
-```bash
-$ mobware-client sdk set ti.mw.todo 2.0 --tiapp TIAPP_XML
-$ mobware-client sdk set ti.mw.todo --tiapp TIAPP_XML
-```
+The `set` command above would generate a section like this in your tiapp.xml:
 
 ```xml
 <ti:app>

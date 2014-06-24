@@ -7,8 +7,15 @@ var program = require('commander'),
 
 program
 	.usage('[options]')
-	.description('disable Appcelerator MobileWare for a project')
+	.description('disable Appcelerator Mobware for a project')
 	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+
+program.on('--help', function() {
+	console.log('  To disable Mobware in a project:');
+	console.log('');
+	console.log('    $ mobware-client disable --tiapp /path/to/tiapp.xml');
+	console.log('');
+});
 
 program.parse(process.argv);
 

@@ -8,7 +8,7 @@ var constants = require('../lib/constants'),
 
 program
 	.usage('username password [options]')
-	.description('enable Appcelerator MobileWare for a project')
+	.description('enable Appcelerator Mobware for a project')
 	.option('-a, --app-id <app-id>', 'App ID with which to associate this MW enablement')
 	.option('-H, --host <host>', 'The host for connecting to the MW server', constants.MW_HOST)
 	.option('-P, --no-prompt', 'No interactive prompting')

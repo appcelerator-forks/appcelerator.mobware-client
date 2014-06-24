@@ -55,7 +55,7 @@ describe('disable.js', function() {
 			});
 		});
 
-		it('should remove MobileWare keys in tiapp.xml', function(done) {
+		it('should remove Mobware keys in tiapp.xml', function(done) {
 			var before = fs.readFileSync(path.join(FIXTURES, 'tiapp.withkeys.xml'), 'utf8');
 			fs.writeFileSync('tiapp.xml', before);
 
@@ -72,7 +72,7 @@ describe('disable.js', function() {
 			});
 		});
 
-		it('should remove MobileWare keys in tiapp.xml as option', function(done) {
+		it('should remove Mobware keys in tiapp.xml as option', function(done) {
 			var before = fs.readFileSync(path.join(FIXTURES, 'tiapp.withkeys.xml'), 'utf8');
 			fs.writeFileSync('tiapp.xml', before);
 

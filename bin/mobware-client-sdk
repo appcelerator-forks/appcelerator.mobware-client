@@ -7,8 +7,23 @@ var program = require('commander'),
 
 program
 	.usage('get|set [NAME] [VERSION] [options]')
-	.description('get or set the active MobileWare SDK')
+	.description('get or set the active Mobware SDK')
 	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+
+program.on('--help', function() {
+	console.log('  Examples:');
+	console.log('');
+	console.log('    # get current Mobware SDK name from tiapp.xml');
+	console.log('    $ mobware-client sdk get');
+	console.log('      name.of.mobwareSdk');
+	console.log('');
+	console.log('    # set Mobware SDK');
+	console.log('    $ mobware-client sdk set my.mw.sdk');
+	console.log('');
+	console.log('    # set Mobware SDK with version');
+	console.log('    $ mobware-client sdk set my.mw.sdk 2.0');
+	console.log('');
+});
 
 program.parse(process.argv);
 
