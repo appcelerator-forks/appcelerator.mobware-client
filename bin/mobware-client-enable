@@ -11,6 +11,7 @@ program
 	.description('enable Appcelerator MobileWare for a project')
 	.option('-a, --app-id <app-id>', 'App ID with which to associate this MW enablement')
 	.option('-H, --host <host>', 'The host for connecting to the MW server', constants.MW_HOST)
+	.option('-P, --no-prompt', 'No interactive prompting')
 	.option('-p, --port <port>', 'The port for connecting to the MW server', constants.MW_PORT)
 	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml to be updated', path.join(process.cwd(), 'tiapp.xml'));
 
@@ -29,17 +30,7 @@ program.on('--help', function() {
 
 program.parse(process.argv);
 
-var username = program.args[0],
-	password = program.args[1] || '';
-
-if (!username) {
-	utils.die('username required');
-}
-if (!password) {
-	utils.die('password required');
-}
-
-mwclient.enable(username, password, program, function(err, results) {
+mwclient.enable(program.args[0], program.args[1], program, function(err, results) {
 	if (err) {
 		if (err.statusCode) {
 			utils.die('%s (code %s)', err.data, err.statusCode);

@@ -43,7 +43,7 @@ describe('enable.js', function() {
 		});
 
 		it('should return error if no username', function(done) {
-			enable(null, 'password', function(err) {
+			enable(null, 'password', {prompt:false}, function(err) {
 				should.exist(err);
 				err.should.match(/username required/);
 				done();
@@ -51,7 +51,15 @@ describe('enable.js', function() {
 		});
 
 		it('should return error if no password', function(done) {
-			enable('username', null, function(err) {
+			enable('username', null, {prompt:false}, function(err) {
+				should.exist(err);
+				err.should.match(/password required/);
+				done();
+			});
+		});
+
+		it('should return error if password not a string', function(done) {
+			enable('username', 123, {prompt:false}, function(err) {
 				should.exist(err);
 				err.should.match(/password required/);
 				done();
@@ -60,7 +68,7 @@ describe('enable.js', function() {
 
 		it('should return error when no server is present', function(done) {
 			constants.MW_HOST = 'somebadhost';
-			enable('test', 'test', function(err) {
+			enable('test', 'test', {prompt:false}, function(err) {
 				should.exist(err);
 				should.exist(err.code);
 				err.code.should.match(/(?:ECONNREFUSED|ENOTFOUND)/);
@@ -172,6 +180,34 @@ describe('enable.js', function() {
 				data.should.containEql('productionkey');
 				done();
 			});
+		});
+
+		it('should prompt for username and password', function(done) {
+			fs.writeFileSync('tiapp.xml',
+				fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8'));
+			enable(null, null, { appId: APPID, tiapp: 'tiapp.xml' }, function(err, results) {
+				should.not.exist(err);
+				should.exist(results);
+				results.result.keys.should.be.an.Object;
+				results.result.keys.development.should.equal('developmentkey');
+				results.result.keys.production.should.equal('productionkey');
+
+				// quick and dirty check
+				var data = fs.readFileSync('tiapp.xml', 'utf8');
+				data.should.containEql('developmentkey');
+				data.should.containEql('productionkey');
+				done();
+			});
+
+			// fake prompt input
+			setTimeout(function() {
+				process.stdin.emit('data', 'test');
+				process.stdin.emit('data', '\n');
+			}, 100);
+			setTimeout(function() {
+				process.stdin.emit('data', 'test');
+				process.stdin.emit('data', '\n');
+			}, 200);
 		});
 
 		it('should overwrite MobileWare keys in tiapp.xml', function(done) {
