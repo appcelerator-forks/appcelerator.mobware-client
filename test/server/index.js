@@ -28,12 +28,14 @@ app.post('/api/v1/auth/login', function(req, res) {
 		pass = req.param('password');
 
 	// auth
-	if (user !== 'test' || pass !== 'test') {
+	if ((user !== 'test' && user !== 'nocookie') || pass !== 'test') {
 		return res.status(400).type('text/plain').send('invalid username/password combo');
 	}
 
 	// add cookie and send
-	res.cookie('connect.sid', 'sessioncookie');
+	if (user !== 'nocookie') {
+		res.cookie('connect.sid', 'sessioncookie');
+	}
 	return res.status(200).type('text/plain').send('logged in');
 });
 

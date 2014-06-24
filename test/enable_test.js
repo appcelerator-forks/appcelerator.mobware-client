@@ -108,6 +108,14 @@ describe('enable.js', function() {
 			});
 		});
 
+		it('should return error when there\'s a cookie error', function(done) {
+			enable('nocookie', 'test', { appId: APPID }, function(err) {
+				should.exist(err);
+				err.toString().should.match(/retrieve cookie/);
+				done();
+			});
+		});
+
 		it('should return callback with error if no tiapp.xml', function(done) {
 			enable('test', 'test', { appId: APPID }, function(err) {
 				should.exist(err);
