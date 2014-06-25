@@ -1,6 +1,6 @@
 > **EXPERIMENTAL CODE. NOT READY FOR PRODUCTION USE.**
 
-# mobware-client
+# mobware-client [![Build Status](https://travis-ci.org/appcelerator/mobware-client.svg?branch=master)](https://travis-ci.org/appcelerator/mobware-client)
 
 Appcelerator Mobware client CLI
 
@@ -124,6 +124,16 @@ The `set` command above would generate a section like this in your tiapp.xml:
 		<module version="2.0" platform="commonjs">ti.mw.todo</module>
 	</modules>
 </ti:app>
+```
+
+## Testing & Coverage [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+```bash
+# run tests & linting
+$ grunt
+
+# generate code coverage report
+$ grunt coverage
 ```
 
 ## Reporting Bugs or submitting fixes
