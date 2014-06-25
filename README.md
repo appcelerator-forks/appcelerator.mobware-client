@@ -4,7 +4,7 @@
 
 Appcelerator Mobware client CLI
 
-## install
+## install [![NPM version](https://badge.fury.io/js/mobware-client.svg)](http://badge.fury.io/js/mobware-client)
 
 ```bash
 $ npm install -g mobware-client
