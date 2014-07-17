@@ -1,6 +1,6 @@
 {
   "name": "mobware-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Appcelerator Mobware client CLI",
   "preferGlobal": true,
   "keywords": [],
