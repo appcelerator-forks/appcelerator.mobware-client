@@ -40,7 +40,7 @@ app.post('/api/v1/auth/login', function(req, res) {
 });
 
 // enable route
-app.post('/api/v1/mmp/enable', function(req, res) {
+app.post('/api/v1/apibuilder/enable', function(req, res) {
 	var appId = req.param('appId');
 
 	// sent a cookie, right?
