@@ -1,17 +1,29 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
+var constants = require('../lib/constants'),
+	program = require('commander'),
 	mwclient = require('..'),
 	path = require('path'),
 	utils = require('../lib/utils');
 
 program
-	.usage('get|set [NAME] [VERSION] [options]')
-	.description('get or set the active Mobware SDK')
-	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
+	.usage('install|get|set [NAME] [VERSION] [options]')
+	.description('perform API Builder SDK operations')
+	.option('-H, --host <host>', 'The host for connecting to the MW server', constants.MW_HOST)
+	.option('-p, --password <password>', 'password for 360 auth')
+	.option('-P, --port <port>', 'The port for connecting to the MW server', constants.MW_PORT)
+	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'))
+	.option('-u, --username <username>', 'username for 360 auth');
 
 program.on('--help', function() {
 	console.log('  Examples:');
+	console.log('');
+	console.log('    # install any available API Builder SDKs');
+	console.log('    $ mobware-client install');
+	console.log('');
+	console.log('    # install specific API Builder SDK, with optional version');
+	console.log('    $ mobware-client install my.apibuilder.sdk');
+	console.log('    $ mobware-client install some.api@1.2.3');
 	console.log('');
 	console.log('    # get current Mobware SDK name from tiapp.xml');
 	console.log('    $ mobware-client sdk get');
@@ -34,6 +46,15 @@ if (program.type === 'set') {
 		utils.die('No sdk name specified for `mwclient sdk set`');
 	}
 	program.version = program.args[2];
+} else if (program.type === 'install' || program.type === 'update') {
+	var value = program.args[1];
+	if (value) {
+		var parts = value.split('@');
+		program.name = parts[0];
+		program.version = parts[1];
+	} else {
+		program.version = null;
+	}
 } else if (program.type !== 'get') {
 	utils.die('Invalid `mwclient sdk` type "' + program.type + '". Must be "get" or "set".');
 }

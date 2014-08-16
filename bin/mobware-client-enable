@@ -11,9 +11,11 @@ program
 	.description('enable Appcelerator Mobware for a project')
 	.option('-a, --app-id <app-id>', 'App ID with which to associate this MW enablement')
 	.option('-H, --host <host>', 'The host for connecting to the MW server', constants.MW_HOST)
-	.option('-P, --no-prompt', 'No interactive prompting')
-	.option('-p, --port <port>', 'The port for connecting to the MW server', constants.MW_PORT)
-	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml to be updated', path.join(process.cwd(), 'tiapp.xml'));
+	.option('-p, --password <password>', 'password for 360 auth')
+	.option('-P, --port <port>', 'The port for connecting to the MW server', constants.MW_PORT)
+	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml to be updated', path.join(process.cwd(), 'tiapp.xml'))
+	.option('-u, --username <username>', 'username for 360 auth')
+	.option('-x, --no-prompt', 'No interactive prompting');
 
 program.on('--help', function() {
 	console.log('  Examples:');

@@ -26,10 +26,13 @@
     "url": "git://github.com/appcelerator/mobware-client.git"
   },
   "dependencies": {
+    "adm-zip": "^0.4.4",
     "async": "^0.9.0",
     "commander": "~2.2.0",
     "querystring": "~0.2.0",
-    "tiapp.xml": "~0.2.0"
+    "request": "^2.40.0",
+    "tiapp.xml": "~0.2.0",
+    "titanium": "^3.3.0"
   },
   "devDependencies": {
     "body-parser": "^1.4.3",
