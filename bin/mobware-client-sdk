@@ -9,6 +9,7 @@ var constants = require('../lib/constants'),
 program
 	.usage('install|get|set [NAME] [VERSION] [options]')
 	.description('perform API Builder SDK operations')
+	.option('-f, --force', 'overwrite existing updates')
 	.option('-H, --host <host>', 'The host for connecting to the MW server', constants.MW_HOST)
 	.option('-p, --password <password>', 'password for 360 auth')
 	.option('-P, --port <port>', 'The port for connecting to the MW server', constants.MW_PORT)
