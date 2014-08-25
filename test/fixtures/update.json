@@ -1,0 +1,39 @@
+{
+	"success": true,
+	"result": {
+		"modules": [
+			{
+				"id": "test1",
+				"description": "MobileWare SDK module",
+				"name": "test1",
+				"min_mobilesdk_version": "3.2.0",
+				"oses": [ "linux", "win32", "osx" ],
+				"platforms": [ "iphone", "android" ],
+				"required": false,
+				"url": "https://localhost:15678/test1.zip",
+				"version": "0.0.1",
+				"_id": "53f712345f0238d123456a1b",
+				"endpoint_id": "53f712345f0238d123456a1b",
+				"created": 1408721940785,
+				"created_by_user_guid": "123456789d8df57c52d14f512fc6c893",
+				"org_id": 12345
+			},
+			{
+				"id": "test2",
+				"description": "MobileWare SDK module",
+				"name": "test2",
+				"min_mobilesdk_version": "3.2.0",
+				"oses": [ "linux", "win32", "osx" ],
+				"platforms": [ "iphone", "android" ],
+				"required": false,
+				"url": "https://localhost:15678/test2.zip",
+				"version": "0.3.1",
+				"_id": "53f712345f0238d123456a1c",
+				"endpoint_id": "53f712345f0238d123456a1c",
+				"created": 1408721940795,
+				"created_by_user_guid": "123456789d8df57d52d14f512fc6c893",
+				"org_id": 12345
+			}
+		]
+	}
+}
