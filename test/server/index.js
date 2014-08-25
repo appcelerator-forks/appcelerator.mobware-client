@@ -39,6 +39,29 @@ app.post('/api/v1/auth/login', function(req, res) {
 	return res.status(200).type('text/plain').send('logged in');
 });
 
+// dummy sdks
+app.get('/test1.zip', function(req, res) {
+	res.status(200).sendfile(path.join(__dirname, '..', 'fixtures', 'test1.zip'));
+});
+
+app.get('/test2.zip', function(req, res) {
+	res.status(200).sendfile(path.join(__dirname, '..', 'fixtures', 'test2.zip'));
+});
+
+// sdk update route
+app.get(constants.UPDATE_API, function(req, res) {
+
+	// sent a cookie, right?
+	if (!req.cookies['connect.sid']) {
+		return res.status(400).type('text/plain').send('no cookie');
+	}
+
+	// send update
+	return res.status(200).type('application/json').send(
+		fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'update.json'), 'utf8'));
+
+});
+
 // enable route
 app.post(constants.ENABLE_API, function(req, res) {
 	var appId = req.param('appId');

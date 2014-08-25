@@ -182,6 +182,23 @@ describe('sdk.js', function() {
 			});
 		});
 
+		it('should retrieve updates', function(done) {
+			sdk({ type: 'install' }, function(err, results) {
+				should.not.exist(err);
+				done();
+			});
+
+			// fake prompt input
+			setTimeout(function() {
+				process.stdin.emit('data', 'test');
+				process.stdin.emit('data', '\n');
+			}, 100);
+			setTimeout(function() {
+				process.stdin.emit('data', 'test');
+				process.stdin.emit('data', '\n');
+			}, 200);
+		});
+
 	});
 
 });
