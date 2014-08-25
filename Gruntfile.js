@@ -93,6 +93,8 @@ module.exports = function(grunt) {
 		// require() constants here, since we need to wait for the "env" task
 		console.log(process.env.MW_CLIENT_TEST);
 		require('./test/server').listen(require('./lib/constants').MW_PORT);
+		delete process.env.APPC_360_USERNAME;
+		delete process.env.APPC_360_PASSWORD;
 	});
 
 	grunt.registerTask('coverage', ['env:dev', 'server', 'istanbul', 'clean']);
