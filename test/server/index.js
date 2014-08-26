@@ -40,12 +40,9 @@ app.post('/api/v1/auth/login', function(req, res) {
 });
 
 // dummy sdks
-app.get('/test1.zip', function(req, res) {
-	res.status(200).sendfile(path.join(__dirname, '..', 'fixtures', 'test1.zip'));
-});
-
-app.get('/test2.zip', function(req, res) {
-	res.status(200).sendfile(path.join(__dirname, '..', 'fixtures', 'test2.zip'));
+app.get('/sdks/*', function(req, res) {
+	var file = path.basename(req.params[0]);
+	res.status(200).sendfile(path.join(__dirname, '..', 'fixtures', file));
 });
 
 // sdk update route
