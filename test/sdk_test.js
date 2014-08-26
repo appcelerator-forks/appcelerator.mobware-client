@@ -187,7 +187,9 @@ describe('sdk.js', function() {
 			});
 		});
 
-		it('should query for, download, and install updates', function(done) {
+		it.skip('should query for, download, and install updates', function(done) {
+			var prepFunc
+
 			async.series([
 
 				// remove existing test modules
@@ -234,7 +236,7 @@ describe('sdk.js', function() {
 			], done);
 		});
 
-		it('should skip already installed sdks', function(done) {
+		it.skip('should skip already installed sdks', function(done) {
 			sdk({ type: 'install' }, function(err, result) {
 				should.not.exist(err);
 				result.should.be.an.Array;
