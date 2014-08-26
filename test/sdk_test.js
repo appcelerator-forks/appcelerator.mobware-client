@@ -1,12 +1,17 @@
 var _ = require('lodash'),
 	async = require('async'),
-	fs = require('fs'),
+	constants = require('../lib/constants'),
+	exec = require('child_process').exec,
+	fs = require('fs-extra'),
 	path = require('path'),
 	sdk = require('..').sdk,
 	should = require('should'),
 	tiappXml = require('tiapp.xml');
 
-var FIXTURES = path.join('test', 'fixtures');
+var FIXTURES = path.join('test', 'fixtures'),
+	SDK_ROOT = constants.TEST_SDK_ROOT;
+
+var sdkDirs = [];
 
 should.Assertion.add('MwSdk', function(mod) {
 	this.params = { operator: 'to have MW SDK configured in tiapp.xml' };
@@ -182,23 +187,83 @@ describe('sdk.js', function() {
 			});
 		});
 
-		it('should retrieve updates', function(done) {
-			sdk({ type: 'install' }, function(err, results) {
+		it('should query for, download, and install updates', function(done) {
+			async.series([
+
+				// remove existing test modules
+				function(callback) {
+					var ti = path.join(__dirname,'..','node_modules','.bin','titanium'),
+						cmd = ti + ' sdk -o json';
+
+					exec(cmd, function(err, stdout) {
+						if (err) { throw err; }
+						var tiPath = JSON.parse(stdout).defaultInstallLocation;
+						if (!tiPath) {
+							throw new Error('unable to find tipath');
+						}
+						tiPath = path.join(tiPath, 'modules', 'commonjs');
+
+						fs.removeSync(path.join(tiPath, SDK_ROOT + '1'));
+						fs.removeSync(path.join(tiPath, SDK_ROOT + '2'));
+						callback();
+					});
+				},
+
+				// run the test
+				function(callback) {
+					sdk({ type: 'install' }, function(err, result) {
+						should.not.exist(err);
+						result.should.be.an.Array;
+						result.length.should.equal(2);
+
+						result.forEach(function(update, index) {
+							sdkDirs.push(update.dir);
+							update.should.be.an.Object;
+							update.name.should.equal(SDK_ROOT + (index + 1));
+							update.version.should.equal(index === 0 ? '0.0.1' : '0.3.1');
+							fs.existsSync(update.dir).should.be.true;
+							fs.existsSync(path.join(update.dir, SDK_ROOT + (index + 1) + '.js')).should.be.true;
+						});
+
+						callback();
+					});
+
+					loginViaPrompt();
+				}
+
+			], done);
+		});
+
+		it('should skip already installed sdks', function(done) {
+			sdk({ type: 'install' }, function(err, result) {
 				should.not.exist(err);
+				result.should.be.an.Array;
+				result.length.should.equal(0);
+
+				sdkDirs.forEach(function(updateDir, index) {
+					var ctr = index+1;
+					updateDir.should.be.a.String;
+					fs.existsSync(updateDir).should.be.true;
+					fs.existsSync(path.join(updateDir, SDK_ROOT + ctr + '.js')).should.be.true;
+				});
+
 				done();
 			});
 
-			// fake prompt input
-			setTimeout(function() {
-				process.stdin.emit('data', 'test');
-				process.stdin.emit('data', '\n');
-			}, 100);
-			setTimeout(function() {
-				process.stdin.emit('data', 'test');
-				process.stdin.emit('data', '\n');
-			}, 200);
+			loginViaPrompt();
 		});
 
 	});
 
 });
+
+function loginViaPrompt() {
+	setTimeout(function() {
+		process.stdin.emit('data', 'test');
+		process.stdin.emit('data', '\n');
+	}, 100);
+	setTimeout(function() {
+		process.stdin.emit('data', 'test');
+		process.stdin.emit('data', '\n');
+	}, 200);
+}
