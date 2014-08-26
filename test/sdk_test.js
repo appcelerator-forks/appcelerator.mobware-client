@@ -187,9 +187,8 @@ describe('sdk.js', function() {
 			});
 		});
 
-		it.skip('should query for, download, and install updates', function(done) {
-			var prepFunc
-
+		var itFunc = process.env.TRAVIS ? it.skip : it;
+		itFunc('should query for, download, and install updates', function(done) {
 			async.series([
 
 				// remove existing test modules
@@ -236,7 +235,7 @@ describe('sdk.js', function() {
 			], done);
 		});
 
-		it.skip('should skip already installed sdks', function(done) {
+		itFunc('should skip already installed sdks', function(done) {
 			sdk({ type: 'install' }, function(err, result) {
 				should.not.exist(err);
 				result.should.be.an.Array;
