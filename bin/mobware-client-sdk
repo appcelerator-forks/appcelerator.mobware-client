@@ -20,11 +20,11 @@ program.on('--help', function() {
 	console.log('  Examples:');
 	console.log('');
 	console.log('    # install any available API Builder SDKs');
-	console.log('    $ mobware-client install');
+	console.log('    $ mobware-client sdk install');
 	console.log('');
 	console.log('    # install specific API Builder SDK, with optional version');
-	console.log('    $ mobware-client install my.apibuilder.sdk');
-	console.log('    $ mobware-client install some.api@1.2.3');
+	console.log('    $ mobware-client sdk install my.apibuilder.sdk');
+	console.log('    $ mobware-client sdk install some.api@1.2.3');
 	console.log('');
 	console.log('    # get current Mobware SDK name from tiapp.xml');
 	console.log('    $ mobware-client sdk get');
