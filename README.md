@@ -96,21 +96,36 @@ Get the MW API keys from the tiapp.xml of an MW-enabled project.
 
 ### sdk
 
-Get or set the active MW SDK for the project.
+Install, get, or set the API Builder SDK for a project.
 
 ```bash
-  Usage: mobware-client-sdk get|set [NAME] [VERSION] [options]
+  Usage: mobware-client-sdk install|get|set [NAME] [VERSION] [options]
 
   Options:
 
-    -h, --help           output usage information
-    -t, --tiapp <tiapp>  Path to tiapp.xml
+    -h, --help                 output usage information
+    -f, --force                overwrite existing updates
+    -H, --host <host>          The host for connecting to the MW server
+    -p, --password <password>  password for 360 auth
+    -P, --port <port>          The port for connecting to the MW server
+    -t, --tiapp <tiapp>        Path to tiapp.xml
+    -u, --username <username>  username for 360 auth
 
   Examples:
+
+    # install any available API Builder SDKs
+    $ mobware-client install
+
+    # install specific API Builder SDK, with optional version
+    $ mobware-client install my.apibuilder.sdk
+    $ mobware-client install some.api@1.2.3
 
     # get current Mobware SDK name from tiapp.xml
     $ mobware-client sdk get
       name.of.mobwareSdk
+
+    # set Mobware SDK
+    $ mobware-client sdk set my.mw.sdk
 
     # set Mobware SDK with version
     $ mobware-client sdk set my.mw.sdk 2.0
