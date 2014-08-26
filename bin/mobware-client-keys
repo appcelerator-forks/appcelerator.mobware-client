@@ -7,14 +7,14 @@ var program = require('commander'),
 
 program
 	.usage('[options]')
-	.description('get Mobware keys from tiapp.xml')
+	.description('get API Builder keys from tiapp.xml')
 	.option('-k, --keys <keys>', 'Key type to return. Can be a comma-separated list.', 'dev,prod')
 	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'));
 
 program.on('--help', function() {
 	console.log('  Examples:');
 	console.log('');
-	console.log('    # list all Mobware keys for an enabled project');
+	console.log('    # list all API Builder keys for an enabled project');
 	console.log('    $ mobware-client keys');
 	console.log('      { "development": "DEVKEY", "production": "PRODKEY" }');
 	console.log('');

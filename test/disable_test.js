@@ -37,7 +37,7 @@ describe('disable.js', function() {
 			});
 		});
 
-		it('should do nothing to tiapp.xml if no MW keys are present', function(done) {
+		it('should do nothing to tiapp.xml if no API Builder keys are present', function(done) {
 			var before = fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8');
 			fs.writeFileSync('tiapp.xml', before);
 
@@ -55,7 +55,7 @@ describe('disable.js', function() {
 			});
 		});
 
-		it('should remove Mobware keys in tiapp.xml', function(done) {
+		it('should remove API Builder keys in tiapp.xml', function(done) {
 			var before = fs.readFileSync(path.join(FIXTURES, 'tiapp.withkeys.xml'), 'utf8');
 			fs.writeFileSync('tiapp.xml', before);
 
@@ -72,7 +72,7 @@ describe('disable.js', function() {
 			});
 		});
 
-		it('should remove Mobware keys in tiapp.xml as option', function(done) {
+		it('should remove API Builder keys in tiapp.xml as option', function(done) {
 			var before = fs.readFileSync(path.join(FIXTURES, 'tiapp.withkeys.xml'), 'utf8');
 			fs.writeFileSync('tiapp.xml', before);
 

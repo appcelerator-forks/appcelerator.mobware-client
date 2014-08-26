@@ -53,7 +53,7 @@ describe('keys.js', function() {
 			});
 		});
 
-		it('should return an empty object if no MW keys are present', function(done) {
+		it('should return an empty object if no API Builder keys are present', function(done) {
 			var before = fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8');
 			fs.writeFileSync('tiapp.xml', before);
 

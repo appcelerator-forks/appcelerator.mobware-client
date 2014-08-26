@@ -10,9 +10,9 @@ program
 	.usage('install|get|set [NAME] [VERSION] [options]')
 	.description('perform API Builder SDK operations')
 	.option('-f, --force', 'overwrite existing updates')
-	.option('-H, --host <host>', 'The host for connecting to the MW server', constants.MW_HOST)
+	.option('-H, --host <host>', 'The host for connecting to the API Builder server', constants.MW_HOST)
 	.option('-p, --password <password>', 'password for 360 auth')
-	.option('-P, --port <port>', 'The port for connecting to the MW server', constants.MW_PORT)
+	.option('-P, --port <port>', 'The port for connecting to the API Builder server', constants.MW_PORT)
 	.option('-t, --tiapp <tiapp>', 'Path to tiapp.xml', path.join(process.cwd(), 'tiapp.xml'))
 	.option('-u, --username <username>', 'username for 360 auth');
 
@@ -26,14 +26,14 @@ program.on('--help', function() {
 	console.log('    $ mobware-client sdk install my.apibuilder.sdk');
 	console.log('    $ mobware-client sdk install some.api@1.2.3');
 	console.log('');
-	console.log('    # get current Mobware SDK name from tiapp.xml');
+	console.log('    # get current API Builder SDK name from tiapp.xml');
 	console.log('    $ mobware-client sdk get');
 	console.log('      name.of.mobwareSdk');
 	console.log('');
-	console.log('    # set Mobware SDK');
+	console.log('    # set API Builder SDK');
 	console.log('    $ mobware-client sdk set my.mw.sdk');
 	console.log('');
-	console.log('    # set Mobware SDK with version');
+	console.log('    # set API Builder SDK with version');
 	console.log('    $ mobware-client sdk set my.mw.sdk 2.0');
 	console.log('');
 });

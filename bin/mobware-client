@@ -6,11 +6,11 @@ var constants = require('../lib/constants'),
 
 program
 	.version(require('../package').version, '-v, --version')
-	.description('Appcelerator Mobware client CLI')
-	.command('disable', 'disable Mobware for a project')
-	.command('enable', 'enable Mobware for a project')
-	.command('keys', 'get Mobware SDK API keys')
-	.command('sdk', 'get or set the active Mobware SDK');
+	.description('Appcelerator API Builder client CLI')
+	.command('disable', 'disable API Builder for a project')
+	.command('enable', 'enable API Builder for a project')
+	.command('keys', 'get API Builder SDK API keys')
+	.command('sdk', 'get or set the active API Builder SDK');
 
 program.parse(process.argv);
 

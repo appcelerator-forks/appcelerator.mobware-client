@@ -2,7 +2,7 @@
 
 # mobware-client [![Build Status](https://travis-ci.org/appcelerator/mobware-client.svg?branch=master)](https://travis-ci.org/appcelerator/mobware-client)
 
-Appcelerator Mobware client CLI
+Appcelerator API Builder client CLI
 
 ## install [![NPM version](https://badge.fury.io/js/mobware-client.svg)](http://badge.fury.io/js/mobware-client)
 
@@ -14,7 +14,7 @@ $ npm install -g mobware-client
 
 ### enable
 
-Enables a Titanium project for MW. It makes an HTTPS request to MW servers and gets API keys in return.  The keys are then added to the user's tiapp.xml file.
+Enables a Titanium project for API Builder. It makes an HTTPS request to API Builder servers and gets API keys in return.  The keys are then added to the user's tiapp.xml file.
 
 ```bash
   Usage: mobware-client-enable username password [options]
@@ -22,10 +22,10 @@ Enables a Titanium project for MW. It makes an HTTPS request to MW servers and g
   Options:
 
     -h, --help             output usage information
-    -a, --app-id <app-id>  App ID with which to associate this MW enablement
-    -H, --host <host>      The host for connecting to the MW server
+    -a, --app-id <app-id>  App ID with which to associate this API Builder enablement
+    -H, --host <host>      The host for connecting to the API Builder server
     -P, --no-prompt        No interactive prompting
-    -p, --port <port>      The port for connecting to the MW server
+    -p, --port <port>      The port for connecting to the API Builder server
     -t, --tiapp <tiapp>    Path to tiapp.xml to be updated
 
   Examples:
@@ -51,7 +51,7 @@ The result of a successful call:
 
 ### disable
 
-The opposite of [enable][], this process will remove MW API keys from your tiapp.xml, thereby invalidating any MW SDK usage. It exits quietly if no keys are present in the tiapp.xml.
+The opposite of [enable][], this process will remove API Builder API keys from your tiapp.xml, thereby invalidating any API Builder SDK usage. It exits quietly if no keys are present in the tiapp.xml.
 
 ```bash
   Usage: mobware-client-disable [options]
@@ -61,14 +61,14 @@ The opposite of [enable][], this process will remove MW API keys from your tiapp
     -h, --help           output usage information
     -t, --tiapp <tiapp>  Path to tiapp.xml
 
-  To disable Mobware in a project:
+  To disable API Builder in a project:
 
     $ mobware-client disable --tiapp /path/to/tiapp.xml
 ```
 
 ### keys
 
-Get the MW API keys from the tiapp.xml of an MW-enabled project.
+Get the API Builder API keys from the tiapp.xml of an API Builder-enabled project.
 
 ```bash
   Usage: mobware-client-keys [options]
@@ -81,7 +81,7 @@ Get the MW API keys from the tiapp.xml of an MW-enabled project.
 
   Examples:
 
-    # list all Mobware keys for an enabled project
+    # list all API Builder keys for an enabled project
     $ mobware-client keys
       { "development": "DEVKEY", "production": "PRODKEY" }
 
@@ -105,9 +105,9 @@ Install, get, or set the API Builder SDK for a project.
 
     -h, --help                 output usage information
     -f, --force                overwrite existing updates
-    -H, --host <host>          The host for connecting to the MW server
+    -H, --host <host>          The host for connecting to the API Builder server
     -p, --password <password>  password for 360 auth
-    -P, --port <port>          The port for connecting to the MW server
+    -P, --port <port>          The port for connecting to the API Builder server
     -t, --tiapp <tiapp>        Path to tiapp.xml
     -u, --username <username>  username for 360 auth
 
@@ -120,14 +120,14 @@ Install, get, or set the API Builder SDK for a project.
     $ mobware-client install my.apibuilder.sdk
     $ mobware-client install some.api@1.2.3
 
-    # get current Mobware SDK name from tiapp.xml
+    # get current API Builder SDK name from tiapp.xml
     $ mobware-client sdk get
       name.of.mobwareSdk
 
-    # set Mobware SDK
+    # set API Builder SDK
     $ mobware-client sdk set my.mw.sdk
 
-    # set Mobware SDK with version
+    # set API Builder SDK with version
     $ mobware-client sdk set my.mw.sdk 2.0
 ```
 

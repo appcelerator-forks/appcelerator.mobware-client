@@ -14,7 +14,7 @@ var FIXTURES = path.join('test', 'fixtures'),
 var sdkDirs = [];
 
 should.Assertion.add('MwSdk', function(mod) {
-	this.params = { operator: 'to have MW SDK configured in tiapp.xml' };
+	this.params = { operator: 'to have API Builder SDK configured in tiapp.xml' };
 
 	// make sure the sdk name property is set
 	this.params.message = 'could not find mw-sdk-name property "' + mod.id + '"';

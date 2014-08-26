@@ -75,7 +75,7 @@ app.post(constants.ENABLE_API, function(req, res) {
 
 	// make sure appId exists
 	if (appId === 'bad.api') {
-		return res.status(500).type('text/plain').send('failed to load MW keys');
+		return res.status(500).type('text/plain').send('failed to load API Builder keys');
 	} else if (appId !== 'ti.mw.todo') {
 		return res.status(400).type('text/plain').send('appId does not exist');
 	}
@@ -92,7 +92,7 @@ app.post(constants.ENABLE_API, function(req, res) {
 			}
 		});
 	} catch (e) {
-		return res.status(500).type('text/plain').send('failed to load MW keys');
+		return res.status(500).type('text/plain').send('failed to load API Builder keys');
 	}
 });
 

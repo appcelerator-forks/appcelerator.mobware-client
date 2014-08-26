@@ -1,7 +1,7 @@
 {
   "name": "mobware-client",
   "version": "0.1.0",
-  "description": "Appcelerator Mobware client CLI",
+  "description": "Appcelerator API Builder client CLI",
   "preferGlobal": true,
   "keywords": [],
   "homepage": "git://github.com/appcelerator/mobware-client.git",

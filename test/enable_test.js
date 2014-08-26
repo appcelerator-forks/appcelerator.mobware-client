@@ -92,7 +92,7 @@ describe('enable.js', function() {
 			});
 		});
 
-		it('should return 400 if appId does not exist in MW', function(done) {
+		it('should return 400 if appId does not exist in API Builder', function(done) {
 			enable('test', 'test', { appId: 'i.do.not.exist' }, function(err) {
 				should.exist(err);
 				err.should.have.HttpCode(400);
@@ -100,7 +100,7 @@ describe('enable.js', function() {
 			});
 		});
 
-		it('should return 500 on MW error', function(done) {
+		it('should return 500 on API Builder error', function(done) {
 			enable('test', 'test', { appId: 'bad.api' }, function(err) {
 				should.exist(err);
 				err.should.have.HttpCode(500);
@@ -132,7 +132,7 @@ describe('enable.js', function() {
 			});
 		});
 
-		it('should write Mobware keys to tiapp.xml', function(done) {
+		it('should write API Builder keys to tiapp.xml', function(done) {
 			fs.writeFileSync('tiapp.xml',
 				fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8'));
 			enable('test', 'test', { appId: APPID }, function(err, results) {
@@ -150,7 +150,7 @@ describe('enable.js', function() {
 			});
 		});
 
-		it('should write Mobware keys to tiapp.xml with explicit host & port', function(done) {
+		it('should write API Builder keys to tiapp.xml with explicit host & port', function(done) {
 			fs.writeFileSync('tiapp.xml',
 				fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8'));
 			enable('test', 'test', {
@@ -172,7 +172,7 @@ describe('enable.js', function() {
 			});
 		});
 
-		it('should write Mobware keys to tiapp.xml as option', function(done) {
+		it('should write API Builder keys to tiapp.xml as option', function(done) {
 			fs.writeFileSync('tiapp.xml',
 				fs.readFileSync(path.join(FIXTURES, 'tiapp.nokeys.xml'), 'utf8'));
 			enable('test', 'test', { appId: APPID, tiapp: 'tiapp.xml' }, function(err, results) {
@@ -218,7 +218,7 @@ describe('enable.js', function() {
 			}, 200);
 		});
 
-		it('should overwrite Mobware keys in tiapp.xml', function(done) {
+		it('should overwrite API Builder keys in tiapp.xml', function(done) {
 			fs.writeFileSync('tiapp.xml', fs.readFileSync(path.join(FIXTURES, 'tiapp.withkeys.xml'), 'utf8'));
 			enable('test', 'test', { appId: APPID }, function(err, results) {
 				should.not.exist(err);
