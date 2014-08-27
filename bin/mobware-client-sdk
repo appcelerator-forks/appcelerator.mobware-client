@@ -65,6 +65,27 @@ mwclient.sdk(program, function(err, results) {
 		utils.die(err.stack);
 	}
 	if (results) {
-		console.log(JSON.stringify(results));
+		if (program.type === 'install' || program.type === 'update') {
+			var last, cache = {};
+			results.filter(function(update) {
+				var key = update.name + '|' + update.version;
+				if (cache[key]) {
+					return false;
+				} else {
+					cache[key] = true;
+					return true;
+				}
+			}).sort(function(a,b) {
+				if (a.name > b.name) { return 1; }
+				if (a.name < b.name) { return -1; }
+				if (a.version > b.version) { return 1; }
+				if (a.version < b.version) { return -1; }
+				return 0;
+			}).forEach(function(update) {
+				console.log('%s@%s %s', update.name, update.version, update.dir);
+			});
+		} else {
+			console.log(JSON.stringify(results));
+		}
 	}
 });
