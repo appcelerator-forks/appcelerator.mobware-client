@@ -62,7 +62,7 @@ if (program.type === 'set') {
 
 mwclient.sdk(program, function(err, results) {
 	if (err) {
-		utils.die(err.toString());
+		utils.die(err.stack);
 	}
 	if (results) {
 		console.log(JSON.stringify(results));
